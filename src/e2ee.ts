@@ -34,6 +34,9 @@ import type {
   StorageAdapter,
 } from "./types";
 
+const isDevelopment =
+  typeof process !== "undefined" && process.env.NODE_ENV !== "production";
+
 // ── Storage key helper ───────────────────────────────────────────
 
 const dekKey = (userId: string) => `e2ee_dek_${userId}`;
@@ -279,7 +282,7 @@ export function createE2EE(storage: StorageAdapter) {
         const plaintext = aesGcmDecrypt(dek, ciphertext, aad);
         return { ...entry, description: bytesToText(plaintext) };
       } catch (err) {
-        if (__DEV__)
+        if (isDevelopment)
           console.warn(`[E2EE] Failed to decrypt entry ${entry.id}`, err);
         return entry;
       }

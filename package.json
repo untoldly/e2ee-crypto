@@ -1,6 +1,6 @@
 {
   "name": "@untoldly/e2ee-crypto",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "E2EE crypto core for Untoldly — audit-focused, platform-agnostic",
   "main": "src/index.ts",
@@ -13,9 +13,13 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react-native-quick-crypto": ">=1.0.0"
+    "react-native-quick-crypto": ">=0.7.17 <2"
+  },
+  "dependencies": {
+    "@craftzdog/react-native-buffer": "^6.0.5"
   },
   "devDependencies": {
+    "react-native-quick-crypto": "^0.7.17",
     "typescript": "~5.9.3",
     "vitest": "^4.0.18"
   }

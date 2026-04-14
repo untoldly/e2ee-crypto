@@ -8,8 +8,8 @@
  * on a stolen device).
  */
 
-import type { Buffer as QuickCryptoBuffer } from "react-native-quick-crypto";
-import * as QuickCrypto from "react-native-quick-crypto";
+import { Buffer } from "@craftzdog/react-native-buffer";
+import QuickCrypto from "react-native-quick-crypto";
 
 // ── Constants ─────────────────────────────────────────────────────
 
@@ -29,8 +29,19 @@ export const DEFAULT_KDF_PARAMS = {
 
 export type KdfParams = typeof DEFAULT_KDF_PARAMS;
 
-function toQuickCryptoBuffer(data: Uint8Array): QuickCryptoBuffer {
-  return Buffer.from(data) as unknown as QuickCryptoBuffer;
+type QuickCryptoBuffer = Exclude<
+  ReturnType<typeof QuickCrypto.randomBytes>,
+  void
+>;
+
+function toQuickCryptoBuffer(
+  data: Uint8Array,
+): QuickCryptoBuffer {
+  return Buffer.from(data) as QuickCryptoBuffer;
+}
+
+function toArrayBuffer(data: Uint8Array): ArrayBuffer {
+  return Uint8Array.from(data).buffer;
 }
 
 // ── Random bytes ──────────────────────────────────────────────────
@@ -167,7 +178,7 @@ export function bytesToText(bytes: Uint8Array): string {
 /** SHA-256 hash of input bytes. */
 export function sha256(data: Uint8Array): Uint8Array {
   const hash = QuickCrypto.createHash("sha256")
-    .update(Buffer.from(data))
+    .update(toArrayBuffer(data))
     .digest();
   return new Uint8Array(hash);
 }

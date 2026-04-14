@@ -52,7 +52,7 @@ interface StorageAdapter {
 
 ## Peer dependencies
 
-`react-native-quick-crypto` >= 1.0.0
+`react-native-quick-crypto` >= 0.7.17 < 2
 
 ## Testing
 
