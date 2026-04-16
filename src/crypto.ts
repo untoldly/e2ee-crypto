@@ -40,10 +40,6 @@ function toQuickCryptoBuffer(
   return Buffer.from(data) as QuickCryptoBuffer;
 }
 
-function toArrayBuffer(data: Uint8Array): ArrayBuffer {
-  return Uint8Array.from(data).buffer;
-}
-
 // ── Random bytes ──────────────────────────────────────────────────
 
 export function randomBytes(length: number): Uint8Array {
@@ -178,7 +174,7 @@ export function bytesToText(bytes: Uint8Array): string {
 /** SHA-256 hash of input bytes. */
 export function sha256(data: Uint8Array): Uint8Array {
   const hash = QuickCrypto.createHash("sha256")
-    .update(toArrayBuffer(data))
+    .update(toQuickCryptoBuffer(data))
     .digest();
   return new Uint8Array(hash);
 }

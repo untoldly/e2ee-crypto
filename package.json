@@ -19,6 +19,7 @@
     "@craftzdog/react-native-buffer": "^6.0.5"
   },
   "devDependencies": {
+    "@types/node": "^25.6.0",
     "react-native-quick-crypto": "^0.7.17",
     "typescript": "~5.9.3",
     "vitest": "^4.0.18"
